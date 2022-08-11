@@ -8,7 +8,7 @@
 
     $sql = "SELECT * FROM `movies`;";
     $results = $database->query($sql);
-    var_dump($results->fetch(PDO::FETCH_ASSOC))."<br>";
+    var_dump($results->fetch(PDO::FETCH_NUM))."<br>";
     while ($row = $results->fetch()) {
         echo $row["title"]."<br>";
     }
