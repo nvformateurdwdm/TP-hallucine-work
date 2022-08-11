@@ -8,9 +8,13 @@
 
     $sql = "SELECT * FROM `movies`;";
     $results = $database->query($sql);
-    var_dump($results->fetch(PDO::FETCH_NUM))."<br>";
-    while ($row = $results->fetch()) {
-        echo $row["title"]."<br>";
+    $rows = $results->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($results->fetchAll()[0])."<br>";
+    // while ($row = $results->fetch()) {
+    //     echo $row["title"]."<br>";
+    // }
+    foreach ($rows as $key => $value) {
+        echo $key." ".$value["title"]."<br>";
     }
 
     function connect($host, $dbname, $login, $password){
