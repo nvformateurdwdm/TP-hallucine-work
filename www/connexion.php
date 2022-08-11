@@ -6,8 +6,9 @@
         die("ERROR: ".$error->getMessage());
     }
 
-    $sql = "SELECT * FROM `movis`;";
+    $sql = "SELECT * FROM `movies`;";
     $results = $database->query($sql);
+    var_dump($results->fetch(PDO::FETCH_ASSOC))."<br>";
     while ($row = $results->fetch()) {
         echo $row["title"]."<br>";
     }
