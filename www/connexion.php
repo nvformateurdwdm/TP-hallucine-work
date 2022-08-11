@@ -6,13 +6,13 @@
         die("ERROR: ".$error->getMessage());
     }
 
-    $sql = "SELECT * FROM `movies`;";
+    $sql = "SELECT * FROM `movis`;";
     $results = $database->query($sql);
     while ($row = $results->fetch()) {
         echo $row["title"]."<br>";
     }
 
     function connect($host, $dbname, $login, $password){
-        return new PDO("mysql:host=".$host.";dbname=".$dbname, $login, $password);
+        return new PDO("mysql:host=".$host.";dbname=".$dbname, $login, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 ?>
