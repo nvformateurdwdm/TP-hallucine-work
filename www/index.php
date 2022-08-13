@@ -1,14 +1,80 @@
+<?php
+    include "connexion.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hallucine</title>
-</head>
+<?php
+    include "head.php";
+?>
 <body>
-    <?php
-        
-    ?>
+    <header>HALLUCINE</header>
+    <div id="container">
+        <div id="left">
+            <nav>
+                <ul>
+                    <li>Films</li>
+                    <li>Acteurs</li>
+                    <li>Réalisateurs</li>
+                </ul>
+            </nav>
+        </div>
+        <div id="right">
+            <select name="" id="">
+                <option value="title">Par titre</option>
+                <option value="added_date">Par date d'ajout</option>
+                <option value="release_date">Par date de sortie</option>
+            </select>
+            <div id="items">
+                <?php
+                    $sql = "SELECT * FROM `movies`;";
+                    $results = $database->query($sql);
+                    $rows = $results->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($rows as $key => $value) {
+                        // echo $key." ".$value["title"]."<br>";
+                        $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
+                        // var_dump($movie);
+                        echo $movie->getMovie();
+                    }
+
+                    class Movie{
+
+                        private int $_id;
+                        private string $_title;
+                        private string $_imageURL;
+                        private int $_runtime;
+                        private string $_description;
+                        private date $_releaseDate;
+                        private date $_addedDate;
+
+                        public function __construct($id, $title, $imageURL, $runtime, $description, $releaseDate, $addedDate){
+                            $this->_id = $id;
+                            $this->_title = $title;
+                            $this->_imageURL = $imageURL;
+                            $this->_runtime = $runtime;
+                            $this->_description = $description;
+                            $this->_releaseDate = Date($releaseDate);
+                            $this->_addedDate = Date($addedDate);
+
+
+                            echo $releaseDate->format("Y");
+                        }
+
+                        public function getMovie(){
+                            $imagePath = "image/";
+                            $html = "<div class='item'>";
+                            $html .= "<img src='$imagePath" . $this->_imageURL . "' " . "alt='$this->_title'>";
+                            $html .= $this->_title;
+                            $html .= "</div>";
+                            // var_dump($html);
+                            return $html;
+                        }
+                    }
+
+                ?>
+            </div>
+        </div>
+    </div>
+    <img src="" class= alt="">
 </body>
 </html>
