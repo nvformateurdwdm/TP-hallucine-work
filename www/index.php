@@ -56,7 +56,6 @@
                             $this->_releaseDate = Date($releaseDate);
                             $this->_addedDate = Date($addedDate);
 
-
                             echo $releaseDate->format("Y");
                         }
 

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 11 août 2022 à 16:50
--- Version du serveur :  10.3.29-MariaDB
--- Version de PHP : 7.4.9
+-- Généré le : sam. 13 août 2022 à 20:45
+-- Version du serveur : 10.4.21-MariaDB
+-- Version de PHP : 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -120,21 +119,23 @@ CREATE TABLE `movies` (
   `image_url` varchar(100) NOT NULL,
   `runtime` int(6) NOT NULL,
   `description` text NOT NULL,
-  `release_date` date NOT NULL
+  `release_date` date NOT NULL,
+  `added_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `movies`
 --
 
-INSERT INTO `movies` (`id`, `title`, `image_url`, `runtime`, `description`, `release_date`) VALUES
-(2, 'L\'année du Requin', 'image2.jpg', 65789, 'Ceci est la desc de l\'année du requin', '2013-08-01'),
-(3, 'Le gendarme de Saint-Tropez', 'le-gendarme-de-saint-tropez.jpg', 5700, 'Suite à une promotion, le gendarme Cruchot quitte son petit village provincial pour prendre se nouvelles fonctions dans la commune de Saint-Tropez. Sa fille unique, la charmante Nicole est folle de joie et ne tarde pas à se faire une foule de nouveaux amis « yé-yé » tout en s’attirant de sacrés ennuis, tandis que Cruchot prend activement la direction d’opérations difficiles et délicates…', '2018-08-01'),
-(4, 'Kompromat', 'kompromat.jpg', 6000, 'Russie, 2017. Mathieu Roussel est arrêté et incarcéré sous les yeux de sa fille. Expatrié français, il est victime d’un « kompromat », de faux documents compromettants utilisés par les services secrets russes pour nuire à un ennemi de l’Etat. Menacé d’une peine de prison à vie, il ne lui reste qu’une option : s’évader, et rejoindre la France par ses propres moyens…', '2022-09-07'),
-(6, 'Le bon, la brute et le truand', 'le-bon-la-brute-et-le-truand.jpg', 10800, 'Pendant la Guerre de Sécession, trois hommes, préférant s\'intéresser à leur profit personnel, se lancent à la recherche d\'un coffre contenant 200 000 dollars en pièces d\'or volés à l\'armée sudiste. Tuco sait que le trésor se trouve dans un cimetière, tandis que Joe connaît le nom inscrit sur la pierre tombale qui sert de cache. Chacun a besoin de l\'autre. Mais un troisième homme entre dans la course : Setenza, une brute qui n\'hésite pas à massacrer femmes et enfants pour parvenir à ses fins.', '1968-03-08'),
-(7, 'L\'avare', 'l-avare.jpg', 5700, 'Harpagon, un bourgeois avare, a une fils, Cléante, et une fille, Elise. Cette dernière est amoureuse de Valère, qui ne trouve d\'autre solution pour se rapprocher de sa bien aimée que de se faire embaucher chez son père comme intendant. Cléante, lui, aime Marianne, une jeune femme sans aucune fortune que Harpagon veut aussi épouser. Le vieux bourgeois décide de marier sa fille au Seigneur Anselme car il accepte d\'en faire son épouse sans dote...', '1980-03-05'),
-(8, 'As Bestas', 'as-bestas.jpg', 6086, 'Antoine et Olga, un couple de Français, sont installés depuis longtemps dans un petit village de Galice. Ils ont une ferme et restaurent des maisons abandonnées pour faciliter le repeuplement. Tout devrait être idyllique mais un grave conflit avec leurs voisins fait monter la tension jusqu’à l’irréparable…', '2022-07-20'),
-(9, 'Polisse', 'polisse.jpg', 7209, 'Le quotidien des policiers de la BPM (Brigade de Protection des Mineurs) ce sont les gardes à vue de pédophiles, les arrestations de pickpockets mineurs mais aussi la pause déjeuner où l’on se raconte ses problèmes de couple ; ce sont les auditions de parents maltraitants, les dépositions des enfants, les dérives de la sexualité chez les adolescents, mais aussi la solidarité entre collègues et les fous rires incontrôlables dans les moments les plus impensables ; c’est savoir que le pire existe, et tenter de faire avec… Comment ces policiers parviennent-ils à trouver l’équilibre entre leurs vies privées et la réalité à laquelle ils sont confrontés, tous les jours ? Fred, l’écorché du groupe, aura du mal à supporter le regard de Melissa, mandatée par le ministère de l’intérieur pour réaliser un livre de photos sur cette brigade.', '2011-09-19');
+INSERT INTO `movies` (`id`, `title`, `image_url`, `runtime`, `description`, `release_date`, `added_date`) VALUES
+(2, 'L\'année du Requin', 'l-annee-du-requin.jpg', 65789, 'Ceci est la desc de l\'année du requin', '2013-08-01', '2022-08-11'),
+(3, 'Le gendarme de Saint-Tropez', 'le-gendarme-de-saint-tropez.jpg', 5700, 'Suite à une promotion, le gendarme Cruchot quitte son petit village provincial pour prendre se nouvelles fonctions dans la commune de Saint-Tropez. Sa fille unique, la charmante Nicole est folle de joie et ne tarde pas à se faire une foule de nouveaux amis « yé-yé » tout en s’attirant de sacrés ennuis, tandis que Cruchot prend activement la direction d’opérations difficiles et délicates…', '2018-08-01', '2022-08-11'),
+(4, 'Kompromat', 'kompromat.jpg', 6000, 'Russie, 2017. Mathieu Roussel est arrêté et incarcéré sous les yeux de sa fille. Expatrié français, il est victime d’un « kompromat », de faux documents compromettants utilisés par les services secrets russes pour nuire à un ennemi de l’Etat. Menacé d’une peine de prison à vie, il ne lui reste qu’une option : s’évader, et rejoindre la France par ses propres moyens…', '2022-09-07', '2022-08-11'),
+(6, 'Le bon, la brute et le truand', 'le-bon-la-brute-et-le-truand.jpg', 10800, 'Pendant la Guerre de Sécession, trois hommes, préférant s\'intéresser à leur profit personnel, se lancent à la recherche d\'un coffre contenant 200 000 dollars en pièces d\'or volés à l\'armée sudiste. Tuco sait que le trésor se trouve dans un cimetière, tandis que Joe connaît le nom inscrit sur la pierre tombale qui sert de cache. Chacun a besoin de l\'autre. Mais un troisième homme entre dans la course : Setenza, une brute qui n\'hésite pas à massacrer femmes et enfants pour parvenir à ses fins.', '1968-03-08', '2022-08-11'),
+(7, 'L\'avare', 'l-avare.jpg', 5700, 'Harpagon, un bourgeois avare, a une fils, Cléante, et une fille, Elise. Cette dernière est amoureuse de Valère, qui ne trouve d\'autre solution pour se rapprocher de sa bien aimée que de se faire embaucher chez son père comme intendant. Cléante, lui, aime Marianne, une jeune femme sans aucune fortune que Harpagon veut aussi épouser. Le vieux bourgeois décide de marier sa fille au Seigneur Anselme car il accepte d\'en faire son épouse sans dote...', '1980-03-05', '2022-08-11'),
+(8, 'As Bestas', 'as-bestas.jpg', 6086, 'Antoine et Olga, un couple de Français, sont installés depuis longtemps dans un petit village de Galice. Ils ont une ferme et restaurent des maisons abandonnées pour faciliter le repeuplement. Tout devrait être idyllique mais un grave conflit avec leurs voisins fait monter la tension jusqu’à l’irréparable…', '2022-07-20', '2022-08-11'),
+(9, 'Polisse', 'polisse.jpg', 7209, 'Le quotidien des policiers de la BPM (Brigade de Protection des Mineurs) ce sont les gardes à vue de pédophiles, les arrestations de pickpockets mineurs mais aussi la pause déjeuner où l’on se raconte ses problèmes de couple ; ce sont les auditions de parents maltraitants, les dépositions des enfants, les dérives de la sexualité chez les adolescents, mais aussi la solidarité entre collègues et les fous rires incontrôlables dans les moments les plus impensables ; c’est savoir que le pire existe, et tenter de faire avec… Comment ces policiers parviennent-ils à trouver l’équilibre entre leurs vies privées et la réalité à laquelle ils sont confrontés, tous les jours ? Fred, l’écorché du groupe, aura du mal à supporter le regard de Melissa, mandatée par le ministère de l’intérieur pour réaliser un livre de photos sur cette brigade.', '2011-09-19', '2022-08-11'),
+(17, 'Nope', 'nope.jpg', 7200, 'Les habitants d’une vallée perdue du fin fond de la Californie sont témoins d’une découverte terrifiante à caractère surnaturel.', '2022-08-26', '2022-08-13');
 
 -- --------------------------------------------------------
 
@@ -301,7 +302,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT pour la table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `movies_castings`
