@@ -17,9 +17,14 @@
         echo $key." ".$value["title"]."<br>";
     }
 
-    $sql = "INSERT INTO `movies` (`title`, `image_url`, `runtime`, `description`, `release_date`) VALUES ('Nope', 'nope.jpg', '7200', 'Les habitants d’une vallée perdue du fin fond de la Californie sont témoins d’une découverte terrifiante à caractère surnaturel.', '2022-08-26')";
-    // echo $sql;
-    $database->query($sql);
+    $sqlCommand = $database->prepare("INSERT INTO `movies` (`title`, `image_url`, `runtime`, `description`, `release_date`) VALUES (?, ?, ?, ?, ?)");
+    $sqlCommandTitle = 'Nope';
+    $sqlCommandImageURL = 'nope.jpg';
+    $sqlCommandRuntime = '7200';
+    $sqlCommandDescription = 'Les habitants d’une vallée perdue du fin fond de la Californie sont témoins d’une découverte terrifiante à caractère surnaturel.';
+    $sqlCommandReleaseDate = '2022-08-26';
+    
+    $sqlCommand->execute([$sqlCommandTitle, $sqlCommandImageURL, $sqlCommandRuntime, $sqlCommandDescription, $sqlCommandReleaseDate]);
 
     function connect($host, $dbname, $login, $password){
         return new PDO("mysql:host=".$host.";dbname=".$dbname, $login, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
