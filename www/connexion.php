@@ -17,8 +17,8 @@
         echo $key." ".$value["title"]."<br>";
     }
 
-    $sql = "INSERT INTO `movies` (`id`, `title`, `image_url`, `runtime`, `description`, `release_date`) VALUES (NULL, 'Nope', 'nope.jpg', '7200', 'Les habitants d’une vallée perdue du fin fond de la Californie sont témoins d’une découverte terrifiante à caractère surnaturel.', '2022-08-26')";
-    echo $sql;
+    $sql = "INSERT INTO `movies` (`title`, `image_url`, `runtime`, `description`, `release_date`) VALUES ('Nope', 'nope.jpg', '7200', 'Les habitants d’une vallée perdue du fin fond de la Californie sont témoins d’une découverte terrifiante à caractère surnaturel.', '2022-08-26')";
+    // echo $sql;
     $database->query($sql);
 
     function connect($host, $dbname, $login, $password){
