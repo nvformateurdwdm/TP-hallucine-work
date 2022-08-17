@@ -33,7 +33,6 @@
                     foreach ($rows as $key => $value) {
                         // echo $key." ".$value["title"]."<br>";
                         $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
-                        // var_dump($movie);
                         echo $movie->getMovie();
                     }
 
@@ -44,8 +43,8 @@
                         private string $_imageURL;
                         private int $_runtime;
                         private string $_description;
-                        private date $_releaseDate;
-                        private date $_addedDate;
+                        private DateTime $_releaseDate;
+                        private DateTime $_addedDate;
 
                         public function __construct($id, $title, $imageURL, $runtime, $description, $releaseDate, $addedDate){
                             $this->_id = $id;
@@ -53,17 +52,18 @@
                             $this->_imageURL = $imageURL;
                             $this->_runtime = $runtime;
                             $this->_description = $description;
-                            $this->_releaseDate = Date($releaseDate);
-                            $this->_addedDate = Date($addedDate);
+                            $this->_releaseDate = new DateTime($releaseDate);
+                            $this->_addedDate = new DateTime($addedDate);
 
-                            echo $releaseDate->format("Y");
+                            // var_dump($this->_releaseDate->format("Y"));
                         }
 
                         public function getMovie(){
                             $imagePath = "image/";
                             $html = "<div class='item'>";
                             $html .= "<img src='$imagePath" . $this->_imageURL . "' " . "alt='$this->_title'>";
-                            $html .= $this->_title;
+                            $html .= $this->_title."<br>";
+                            $html .= $this->_releaseDate->format("Y");
                             $html .= "</div>";
                             // var_dump($html);
                             return $html;
