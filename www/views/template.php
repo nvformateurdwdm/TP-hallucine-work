@@ -1,10 +1,12 @@
-<?php
-    include "connexion.php";
-?>
-
-<?php
-    include "views/head.php";
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style/styles.css" rel="stylesheet">
+    <title>echo isset($pageTitle) ? $pageTitle : "TP Halluciné"</title>
+</head>
 
 <body>
     <header>HALLUCINE</header>
@@ -31,6 +33,5 @@
             </div>
         </div>
     </div>
-    <img src="" class= alt="">
 </body>
 </html>
