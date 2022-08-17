@@ -31,7 +31,6 @@
                     $results = $database->query($sql);
                     $rows = $results->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($rows as $key => $value) {
-                        // echo $key." ".$value["title"]."<br>";
                         $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
                         echo $movie->getMovie();
                     }
