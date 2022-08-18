@@ -10,12 +10,20 @@ abstract class Model{
 
     protected function _getDatabase(){
         if(self::$pdo === null){
-            self::_connect("localhost", "hallucine", "root", "Admin-01");
+            try{
+                self::$pdo = self::_connect("localhost", "hallucine", "root", "Admin-01");
+            }catch(Exception $error){
+                echo "Erreur de connexion à la BDD.<br>";
+                die("ERROR: ".$error->getMessage());
+            }
         }
         return self::$pdo;
     }
 
     private static function _connect($host, $dbname, $login, $password){
-        return new PDO("mysql:host=".$host.";dbname=".$dbname, $login, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $db = new PDO("mysql:host=".$host.";dbname=".$dbname, $login, $password);
+        // , array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        return $db;
     }
 }
