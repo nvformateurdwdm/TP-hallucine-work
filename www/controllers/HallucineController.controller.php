@@ -1,15 +1,15 @@
 <?php
-require_once "models/HallucineManager.class.php";
+require_once "models/HallucineModel.class.php";
 
 class HallucineController{
-    private $hallucineManager;
+    private $_hallucineModel;
 
     public function __construct(){
-        $this->hallucineManager = new HallucineManager;
+        $this->_hallucineModel = new HallucineModel;
     }
 
     public function showMovies(){
-        $hm = $this->hallucineManager;
+        $hm = $this->_hallucineModel;
         $hm->requestMovies();
         $movies =$hm->getMovies();
         require "views/movies.view.php";

@@ -1,6 +1,6 @@
 <?php
 require_once "controllers/HallucineController.controller.php";
-$hallucineController = new HallucineController;
+$hallucineController = new HallucineController();
 
 // if(empty($_GET['page'])){
 //     require "views/accueil.view.php";
@@ -12,6 +12,19 @@ $hallucineController = new HallucineController;
 //         break;
 //     }
 // }
+
+if(empty($_GET['page'])){
+    // require "views/accueil.view.php";
+} else {
+    switch($_GET['page']){
+        case "movie" :
+            require "views/accueil.view.php";
+        break;
+        case "livres" :
+            
+        break;
+    }
+}
 
 $hallucineController->showMovies();
 

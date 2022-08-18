@@ -7,12 +7,15 @@ ob_start();
 for($i=0; $i < count($movies);$i++) : 
 ?>
 
-<div class="item">
-    <img src="image/<?= $movies[$i]->getImageUrl(); ?>">
-    <?= $movies[$i]->getTitle(); ?>
-    <br>
-    <?= $movies[$i]->getReleaseDate()->format("Y"); ?>
-</div>
+<a href="index.php?page=movie&movieid=<?= $movies[$i]->getId(); ?>">
+    <div class="item" >
+        <img src="image/<?= $movies[$i]->getImageUrl(); ?>">
+        <br>
+        <?= $movies[$i]->getTitle(); ?>
+        <br>
+        <span class="item_date"><?= $movies[$i]->getReleaseDate()->format("Y"); ?></span>
+    </div>
+</a>
 
 <?php endfor; ?>
 

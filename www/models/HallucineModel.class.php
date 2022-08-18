@@ -4,7 +4,7 @@ require_once "Model.class.php";
 require_once "Movie.class.php";
 require_once "Casting.class.php";
 
-class HallucineManager extends Model{
+class HallucineModel extends Model{
     private $_movies;
 
     public function requestMovies(){

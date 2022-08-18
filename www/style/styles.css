@@ -48,12 +48,15 @@ nav{
 #items{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    max-width: 800px;
+    /* max-width: 800px; */
     gap: 10px;
-    margin: 30px, auto, 0;
+    margin: 0, auto, 0;
+    padding-top: 10px;
 }
 
 .item{
+    border-style: solid;
+    border: 20px;
     font-size: 13px;
     text-align: center;
     color: #ffffff;
@@ -64,4 +67,9 @@ nav{
 .item img{
     max-width: 160px;
     height: auto;
+}
+
+.item_date{
+    color: #d2caca;
+    font-size: 9px;
 }

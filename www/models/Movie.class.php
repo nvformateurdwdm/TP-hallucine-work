@@ -29,16 +29,6 @@ class Movie{
     public function getDescription(){return $this->_description;}
     public function getReleaseDate(){return $this->_releaseDate;}
     public function getAddedDate(){return $this->_addedDate;}
-
-    // public function getMovie(){
-    //     $imagePath = "image/";
-    //     $html = "<div class='item'>";
-    //     $html .= "<img src='$imagePath" . $this->_imageURL . "' " . "alt='$this->_title'>";
-    //     $html .= $this->_title."<br>";
-    //     $html .= $this->_releaseDate->format("Y");
-    //     $html .= "</div>";
-    //     return $html;
-    // }
     
 }
 
