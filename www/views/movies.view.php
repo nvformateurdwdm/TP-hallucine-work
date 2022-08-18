@@ -1,19 +1,23 @@
 <?php 
 ob_start();
-echo $movies[0]->getImageUrl();
+// var_dump($movies[0]->getTitle());
 ?>
 
 <?php
 for($i=0; $i < count($movies);$i++) : 
 ?>
-<?php $imagePath = "image/" ?>
+
 <div class="item">
-    <img src="image/<?= $movies[$i]->getImageUrl(); ?>"
+    <img src="image/<?= $movies[$i]->getImageUrl(); ?>">
+    <?= $movies[$i]->getTitle(); ?>
+    <br>
+    <?= $movies[$i]->getReleaseDate()->format("Y"); ?>
 </div>
+
 <?php endfor; ?>
 
 <?php
 $content = ob_get_clean();
-$pageTitle = "Hallucine - Films";
+$pageTitle = "Halluciné - Films";
 require "template.php";
 ?>
