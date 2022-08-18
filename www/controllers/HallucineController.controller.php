@@ -11,12 +11,14 @@ class HallucineController{
     public function showMovies(){
         $hm = $this->_hallucineModel;
         $hm->requestMovies();
-        $movies =$hm->getMovies();
+        $movies = $hm->getMovies();
         require "views/movies.view.php";
     }
 
     public function showMovie(int $movieId){
-
+        $hm = $this->_hallucineModel;
+        $hm->requestMovie();
+        $movie = $hm->getMovie();
     }
 
     public function showCastings(){

@@ -73,3 +73,41 @@ nav{
     color: #d2caca;
     font-size: 9px;
 }
+
+#movie_section{
+    padding:42px 32px ;
+}
+
+#movie_section_content_left, #movie_section_content_right{
+    display: inline-block;
+    height: 100%;
+}
+
+#movie_section_content_left{
+    width: 20%;
+    /* background-color: #333538; */
+}
+
+#movie_section_content_right{
+    width: 75%;
+    /* background-color: #7c7f83; */
+    float: right;
+}
+
+#movie_section_content_left img{
+    padding-top: 22px;
+    max-width: 280px;
+    height: auto;
+}
+
+#rating {
+    width: 180px;
+    height: 5px;
+    background-color: black;
+}
+
+#progressBar {
+    width: 50%;
+    height: 5px;
+    background-color: yellow;
+}

@@ -18,7 +18,8 @@ if(empty($_GET['page'])){
 } else {
     switch($_GET['page']){
         case "movie" :
-            require "views/accueil.view.php";
+            $movieId = $_GET['movieid'];
+            // require "views/accueil.view.php";
         break;
         case "livres" :
             
