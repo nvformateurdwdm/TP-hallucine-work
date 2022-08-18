@@ -21,14 +21,14 @@
             </nav>
         </div>
         <div id="right">
-            <select name="" id="">
+        <select name="" id="" style="display:<?= isset($displayList) & $displayList ? "block" : "none"; ?>">
                 <option value="title">Par titre</option>
                 <option value="added_date">Par date d'ajout</option>
                 <option value="release_date">Par date de sortie</option>
             </select>
-            <div id="items">
+            <!-- <div id="items"> -->
                 <?= $content ?>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 </body>

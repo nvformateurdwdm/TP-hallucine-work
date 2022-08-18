@@ -17,8 +17,9 @@ class HallucineController{
 
     public function showMovie(int $movieId){
         $hm = $this->_hallucineModel;
-        $hm->requestMovie();
+        $hm->requestMovie($movieId);
         $movie = $hm->getMovie();
+        require "views/movie.view.php";
     }
 
     public function showCastings(){

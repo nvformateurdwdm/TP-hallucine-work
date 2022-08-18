@@ -1,4 +1,7 @@
 <?php
+
+define("IMAGE_PATH", "image/");
+
 require_once "controllers/HallucineController.controller.php";
 $hallucineController = new HallucineController();
 
@@ -15,18 +18,17 @@ $hallucineController = new HallucineController();
 
 if(empty($_GET['page'])){
     // require "views/accueil.view.php";
+    $hallucineController->showMovies();
 } else {
     switch($_GET['page']){
         case "movie" :
             $movieId = $_GET['movieid'];
-            // require "views/accueil.view.php";
+            $hallucineController->showMovie($movieId);
         break;
-        case "livres" :
+        case "castings" :
             
         break;
     }
 }
-
-$hallucineController->showMovies();
 
 ?>

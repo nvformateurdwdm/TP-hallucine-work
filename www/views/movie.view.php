@@ -6,11 +6,11 @@ ob_start();
 <section id="movie_section">
     <div id="movie_section_content">
         <div id="movie_section_content_left">
-            <img src="image/kompromat.jpg">
+            <img src="<?= IMAGE_PATH.$movie->getImageUrl(); ?>">
         </div>
         <div id="movie_section_content_right">
-            <h2>Kompromat</h2>
-            <h3>12-12-2021</h3>
+            <h2><?= $movie->getTitle(); ?></h2>
+            <h3><?= $movie->getReleaseDate()->format("d-m-Y"); ?></h3>
             <div id="rating" data-attr="">
                 <div id="progressBar"></div>
             </div>
@@ -19,7 +19,15 @@ ob_start();
             <h4>Acteurs : Kad Merad, Marina Foïs, Kad Merad, Marina Foïs, Kad Merad, Marina Foïs, Kad Merad, Marina Foïs</h4>
             <h4>Scénariste : Kad Merad, Marina Foïs</h4>
             <h4>Réalisateur : Kad Merad, Marina Foïs</h4>
-            <h3>Résumé :<br> Un film français plein de gags avec Kad Merad, Marina Foïs...</h3>
+            <h3>Résumé :<br> <?= $movie->getDescription(); ?></h3>
         </div>
+        <footer></footer>
     </div>
 </div>
+
+<?php
+$content = ob_get_clean();
+$pageTitle = "Halluciné - ".$movie->getTitle();
+$displayList = false;
+require "template.php";
+?>

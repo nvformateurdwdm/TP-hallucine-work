@@ -111,3 +111,7 @@ nav{
     height: 5px;
     background-color: yellow;
 }
+
+footer{
+    clear: both;
+}

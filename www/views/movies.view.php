@@ -3,13 +3,15 @@ ob_start();
 // var_dump($movies[0]->getTitle());
 ?>
 
+<div id="items">
+
 <?php
 for($i=0; $i < count($movies);$i++) : 
 ?>
 
 <a href="index.php?page=movie&movieid=<?= $movies[$i]->getId(); ?>">
     <div class="item" >
-        <img src="image/<?= $movies[$i]->getImageUrl(); ?>">
+        <img src="<?= IMAGE_PATH.$movies[$i]->getImageUrl(); ?>">
         <br>
         <?= $movies[$i]->getTitle(); ?>
         <br>
@@ -19,8 +21,11 @@ for($i=0; $i < count($movies);$i++) :
 
 <?php endfor; ?>
 
+</div>
+
 <?php
 $content = ob_get_clean();
+$displayList = true;
 $pageTitle = "Halluciné - Films";
 require "template.php";
 ?>
