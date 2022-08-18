@@ -9,7 +9,7 @@ class HallucineManager extends Model{
 
     public function requestMovies(){
         $_movies = array();
-        $sql = "SELECT * FROM `movies`;";
+        $sql = "SELECT * FROM `movies` ORDER BY title;";
 
         $request = $this->_getDatabase()->prepare($sql);
         $request->execute();
@@ -18,8 +18,6 @@ class HallucineManager extends Model{
 
         foreach ($rows as $key => $value) {
             $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
-            //$this->ajoutLivre($l);
-            // $this->livres[] = $livre; >>> autre possibilité d'ajout dans un tab ?...
             $this->_movies[] = $movie;
         }
         // var_dump($this->_movies);
