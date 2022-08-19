@@ -8,9 +8,26 @@ class HallucineModel extends Model{
     private $_movies;
     private $_movie;
 
-    public function requestMovies(){
+    const SORT_MOVIES_BY_TITLE = 0;
+    const SORT_MOVIES_BY_RELEASE_DATE = 1;
+    const SORT_MOVIES_BY_ADDED_DATE = 2;
+
+    public function requestMovies(int $sort = self::SORT_MOVIES_BY_TITLE){
         $_movies = array();
-        $sql = "SELECT * FROM `movies` ORDER BY title;";
+        switch ($sort) {
+            case self::SORT_MOVIES_BY_TITLE:
+                $sql = "SELECT * FROM `movies` ORDER BY title;";
+                break;
+            case self::SORT_MOVIES_BY_RELEASE_DATE:
+                $sql = "SELECT * FROM `movies` ORDER BY release_date;";
+                break;
+            case self::SORT_MOVIES_BY_ADDED_DATE:
+                $sql = "SELECT * FROM `movies` ORDER BY added_date;";
+                break;
+            default:
+                $sql = "SELECT * FROM `movies`;";
+                break;
+        }
 
         $request = $this->_getDatabase()->prepare($sql);
         $request->execute();

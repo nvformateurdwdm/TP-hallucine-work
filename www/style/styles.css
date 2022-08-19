@@ -55,8 +55,8 @@ nav{
 }
 
 .item{
-    border-style: solid;
-    border: 20px;
+    /* border-style: solid;
+    border: 20px; */
     font-size: 13px;
     text-align: center;
     color: #ffffff;

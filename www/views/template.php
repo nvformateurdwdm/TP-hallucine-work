@@ -15,21 +15,24 @@
             <nav>
                 <ul>
                     <li>Films</li>
-                    <li>Acteurs</li>
-                    <li>Réalisateurs</li>
+                    <li>Castings</li>
                 </ul>
             </nav>
         </div>
         <div id="right">
-        <select name="" id="" style="display:<?= isset($displayList) & $displayList ? "block" : "none"; ?>">
-                <option value="title">Par titre</option>
-                <option value="added_date">Par date d'ajout</option>
-                <option value="release_date">Par date de sortie</option>
-            </select>
+        <select name="" id="sort" style="display:<?= isset($displayList) & $displayList ? "block" : "none"; ?>">
+            
+            <option value="0" <?= isset($sort) && $sort == 0 ? "selected" : ""; ?> >Par titre</option>
+            <option value="1" <?= isset($sort) && $sort == 1 ? "selected" : ""; ?> >Par date de sortie</option>
+            <option value="2" <?= isset($sort) && $sort == 2 ? "selected" : ""; ?> >Par date d'ajout</option>
+        </select>
+        <span id="back"style="display:<?= isset($displayList) && $displayList ? "none" : "block"; ?>">Retour</span>
             <!-- <div id="items"> -->
                 <?= $content ?>
             <!-- </div> -->
         </div>
     </div>
+    <script src="javascript/fw.js"></script>
+    <script src="javascript/script.js"></script>
 </body>
 </html>
