@@ -6,6 +6,8 @@ require_once "Casting.class.php";
 // require_once "config.php";
 
 class HallucineModel extends Model{
+    private $_user;
+    private int $_loginStatus;
     private $_movies;
     private $_movie;
 
@@ -13,14 +15,36 @@ class HallucineModel extends Model{
     const SORT_MOVIES_BY_RELEASE_DATE = 1;
     const SORT_MOVIES_BY_ADDED_DATE = 2;
 
+    const LOGIN_USER_NOT_FOUND = 0;
+    const LOGIN_INCORRECT_PASSWORD = 1;
+    const LOGIN_OK = 2;
+
     public function requestLogin(){
-        $email = isset($_POST["email"]) ? $this->checkInput($_POST["email"]) : "";
+        $email = isset($_POST["email"]) ? $this->_checkInput($_POST["email"]) : "";
         $password = isset($_POST["password"]) ? isset($_POST["password"]) : "";
-        $sql = "SELECT *  FROM `users` WHERE `email` = $email;";
-        // var_dump($email);
+        $sql = "SELECT *  FROM `users` WHERE `email` LIKE '$email'";
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+        var_dump($rows);
+        if(count($rows) == 0){
+            $this->_loginStatus = self::LOGIN_USER_NOT_FOUND;
+            return;
+        }else{
+            $value = $rows[0];
+            if ($value["password"] != $password) {
+                $this->_loginStatus = self::LOGIN_INCORRECT_PASSWORD;
+                return;
+            } else {
+                $_user = new User($value["id"], $value["firstname"], $value["lastname"], $value["email"], $value["password"], $value["sex"]);
+                $this->_loginStatus = self::LOGIN_OK;
+            }
+        }
     }
 
-    public function checkInput($input){
+    public function getUser(){return $this->_user;}
+
+    public function getLoginStatus(){return $this->_loginStatus;}
+
+    private function _checkInput($input){
         $input = trim($input);
         $input = stripslashes($input);
         $input = htmlspecialchars($input);

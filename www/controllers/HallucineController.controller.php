@@ -11,6 +11,21 @@ class HallucineController{
     public function showLoginRegistration($part){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $this->_hallucineModel->requestLogin();
+            $loginStatus = $this->_hallucineModel->getLoginStatus();
+            switch ($loginStatus) {
+                case HallucineModel::LOGIN_USER_NOT_FOUND:
+                    require "views/login-registration.view.php";
+                    break;
+                case HallucineModel::LOGIN_INCORRECT_PASSWORD:
+                    require "views/login-registration.view.php";
+                    break;
+                case HallucineModel::LOGIN_OK:
+                    $this->showMovies(0);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
         }else{
             require "views/login-registration.view.php";
         }
