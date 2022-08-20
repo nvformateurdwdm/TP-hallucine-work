@@ -11,6 +11,9 @@ if(empty($_GET['page'])){
     $hallucineController->showMovies($sort);
 } else {
     switch($_GET['page']){
+        case "login": 
+            $hallucineController->showLogin();
+        break;
         case "movies":
             $sort = isset($_GET['sort']) ? $_GET['sort'] : 0;
             $hallucineController->showMovies($sort);

@@ -8,6 +8,14 @@ class HallucineController{
         $this->_hallucineModel = new HallucineModel;
     }
 
+    public function showLogin(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        }else{
+            require "views/login-registration.view.php";
+        }
+    }
+
     public function showMovies($sort){
         $hm = $this->_hallucineModel;
         $hm->requestMovies($sort);
