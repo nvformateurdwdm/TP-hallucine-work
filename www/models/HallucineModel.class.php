@@ -33,8 +33,8 @@ class HallucineModel extends Model{
         }else{
             $value = $rows[0];
             // var_dump($value["password"]);
-            echo "2 ".$password."<br>";
-            echo $value["password"] !== $password;
+            // echo "2 ".$password."<br>";
+            // echo $value["password"] !== $password;
             if ($value["password"] !== $password) {
                 $this->_loginStatus = self::LOGIN_INCORRECT_PASSWORD;
                 return;

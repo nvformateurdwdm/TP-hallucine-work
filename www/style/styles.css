@@ -15,6 +15,16 @@ li{
     /* margin-bottom: 10px; */
 }
 
+a{
+    /* text-decoration: none; */
+    color: #ffffff;
+}
+
+a:hover{
+    /* text-decoration: underline; */
+    color:yellow;
+}
+
 header{
     height: 90px;
     background-color: #232527;
@@ -47,14 +57,14 @@ nav{
     float: right;
 }
 
-form {
+#login, #registration {
     background-color: #7c7f83;
     width: 300px;
     border-radius: 10px;
     margin: auto;
 }
 
-label, input, select, textarea {
+#login a, label, input {
     display: block;
     margin: auto;
 }
@@ -65,7 +75,7 @@ label, input, select, textarea {
     width: 250px;
 }
 
-input, label {
+#login a, label, input {
     width: 250px;
 }
 

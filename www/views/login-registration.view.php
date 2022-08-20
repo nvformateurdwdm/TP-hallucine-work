@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body id="<?=$idBodyCss?>">
 <section id="login-registration_section">
     <div id="login-registration_section_content">
-        <form id="$part" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=$part") ?>" method="POST">
+        <form id="<?= $part; ?>" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=$part") ?>" method="POST">
             <h1>Connexion</h1>
 
             <!-- <label><b>email</b></label> -->
@@ -34,6 +34,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <br>
 
             <input type="submit" id='submit' value='<?= $part; ?>' >
+
+            <a href="index.php?page=movies">Continuer sans s'identifier.</a>
 
             <?php
             if(isset($loginStatus)){
