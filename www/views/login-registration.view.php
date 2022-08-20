@@ -1,12 +1,22 @@
 <?php
 
+require_once "models/HallucineModel.class.php";
 ob_start();
 
 ?>
 
 <?php
-    include "head.php";
-    $idBodyCss = "login-registration";
+include "head.php";
+$idBodyCss = "login-registration";
+?>
+
+<?php
+$email = IS_DEBUG ? "nicolas.vedrine@gmail.com" : "";
+$password = IS_DEBUG ? "toto" : "";
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $email = $_POST["email"];
+    $password = "";
+}
 ?>
 
 <body id="<?=$idBodyCss?>">
@@ -16,14 +26,33 @@ ob_start();
             <h1>Connexion</h1>
 
             <!-- <label><b>email</b></label> -->
-            <input type="text" placeholder="Votre email" name="email" required value="<?= IS_DEBUG ? "nicolas.vedrine@gmail.com" : ""; ?>">
+            <input type="text" placeholder="Votre email" name="email" required value="<?= $email; ?>">
 
             <!-- <label><b>Mot de passe</b></label> -->
             
-            <input type="password" placeholder="Votre mot de passe" name="password" required value="<?= IS_DEBUG ? "1234" : ""; ?>">
+            <input type="password" placeholder="Votre mot de passe" name="password" required value="<?= $password; ?>">
             <br>
 
             <input type="submit" id='submit' value='<?= $part; ?>' >
+
+            <?php
+            if(isset($loginStatus)){
+                $error = "";
+                switch ($loginStatus) {
+                    case HallucineModel::LOGIN_USER_NOT_FOUND:
+                        $error = "Utilisateur introuvable.";
+                        break;
+                    case HallucineModel::LOGIN_INCORRECT_PASSWORD:
+                        $error = "Mot de passe incorrect.";
+                        break;
+                    default:
+                        $error = "Erreur inconnue...";
+                        break;
+                }
+                if($error != "")
+                    echo "<p class='error'>$error</p>";
+            }
+            ?>
         </form>
     </div>
 </section>

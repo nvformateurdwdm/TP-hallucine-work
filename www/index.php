@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $hallucineController->showLoginRegistration("login");
             break;
         default:
-            # code...
+            
             break;
     }
 }else{

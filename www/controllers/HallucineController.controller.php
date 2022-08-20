@@ -10,7 +10,10 @@ class HallucineController{
 
     public function showLoginRegistration($part){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $this->_hallucineModel->requestLogin();
+            // echo "shicdoshdckdfjshiv".$_POST["password"];
+            // echo "1 ".$_POST["password"];
+            // echo "<br>";
+            $this->_hallucineModel->requestLogin($_POST["email"], $_POST["password"]);
             $loginStatus = $this->_hallucineModel->getLoginStatus();
             switch ($loginStatus) {
                 case HallucineModel::LOGIN_USER_NOT_FOUND:
@@ -20,6 +23,9 @@ class HallucineController{
                     require "views/login-registration.view.php";
                     break;
                 case HallucineModel::LOGIN_OK:
+                    session_start();
+                    $user = $this->_hallucineModel->getUser();
+                    $_SESSION['user'] = $user;
                     $this->showMovies(0);
                     break;
                 default:

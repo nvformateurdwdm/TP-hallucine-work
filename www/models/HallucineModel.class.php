@@ -3,6 +3,7 @@
 require_once "Model.class.php";
 require_once "Movie.class.php";
 require_once "Casting.class.php";
+require_once "User.class.php";
 // require_once "config.php";
 
 class HallucineModel extends Model{
@@ -19,18 +20,22 @@ class HallucineModel extends Model{
     const LOGIN_INCORRECT_PASSWORD = 1;
     const LOGIN_OK = 2;
 
-    public function requestLogin(){
-        $email = isset($_POST["email"]) ? $this->_checkInput($_POST["email"]) : "";
-        $password = isset($_POST["password"]) ? isset($_POST["password"]) : "";
-        $sql = "SELECT *  FROM `users` WHERE `email` LIKE '$email'";
+    public function requestLogin($email, $password){
+        $email = $this->_checkInput($email);
+        // echo "2 ".$password."<br>";
+        // $password = $password;
+        $sql = "SELECT *  FROM `users` WHERE `email` = '$email'";
         $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
-        var_dump($rows);
+        // var_dump($rows);
         if(count($rows) == 0){
             $this->_loginStatus = self::LOGIN_USER_NOT_FOUND;
             return;
         }else{
             $value = $rows[0];
-            if ($value["password"] != $password) {
+            // var_dump($value["password"]);
+            echo "2 ".$password."<br>";
+            echo $value["password"] !== $password;
+            if ($value["password"] !== $password) {
                 $this->_loginStatus = self::LOGIN_INCORRECT_PASSWORD;
                 return;
             } else {
