@@ -13,6 +13,24 @@ class HallucineModel extends Model{
     const SORT_MOVIES_BY_RELEASE_DATE = 1;
     const SORT_MOVIES_BY_ADDED_DATE = 2;
 
+    public function requestLogin(){
+        $email = isset($_POST["email"]) ? $this->checkInput($_POST["email"]) : "";
+        $password = isset($_POST["password"]) ? isset($_POST["password"]) : "";
+        $sql = "SELECT *  FROM `users` WHERE `email` = $email;";
+        // var_dump($email);
+    }
+
+    public function checkInput($input){
+        $input = trim($input);
+        $input = stripslashes($input);
+        $input = htmlspecialchars($input);
+        if(IS_DEBUG){
+            // echo $input;
+            // echo "<br>";
+        }
+        return $input;
+    }
+    
     public function requestMovies(int $sort = self::SORT_MOVIES_BY_TITLE){
         $_movies = array();
         switch ($sort) {

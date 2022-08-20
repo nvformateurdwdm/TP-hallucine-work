@@ -8,9 +8,9 @@ class HallucineController{
         $this->_hallucineModel = new HallucineModel;
     }
 
-    public function showLogin(){
+    public function showLoginRegistration($part){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-
+            $this->_hallucineModel->requestLogin();
         }else{
             require "views/login-registration.view.php";
         }

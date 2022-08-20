@@ -1,6 +1,8 @@
 body {
     margin: 0;
     font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    background-color:black;
+    color: #ffffff;
 }
 
 ul{
@@ -45,13 +47,27 @@ nav{
     float: right;
 }
 
-/* #items{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    max-width: 800px;
-    gap: 10px;
-    margin: 30px, auto, 0;
-} */
+form {
+    background-color: #7c7f83;
+    width: 300px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+label, input, select, textarea {
+    display: block;
+    margin: auto;
+}
+
+#select {
+    display: flex;
+    margin: auto;
+    width: 250px;
+}
+
+input, label {
+    width: 250px;
+}
 
 .item{
     font-size: 13px;
@@ -67,6 +83,10 @@ nav{
     display: block;
     margin: auto;
     margin-top: 10px;
+}
+
+#login-registration_section{
+    margin: auto;
 }
 
 #movie #movie_section_content {
