@@ -17,17 +17,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             break;
     }
 }else{
+    session_start();
     if(empty($_GET['page'])){
+        // echo "test<br>";
         // require "views/accueil.view.php";
         // $sort = isset($_GET['sort']) ? $_GET['sort'] : 0;
-        $hallucineController->showLoginRegistration("login");
+        if(isset($_SESSION['user'])){
+            // echo "user";
+            $user = $_SESSION['user'];
+            $hallucineController->showMovies(0);
+        }else{
+            $hallucineController->showLoginRegistration("login");
+        }
     } else {
+        if(IS_DEBUG){echo $_GET['page'];}
         switch($_GET['page']){
             case "login":
                 $hallucineController->showLoginRegistration("login");
             break;
             case "logout":
-                session_unset();
+                echo "logout";
+                // session_start();
+                session_destroy();
                 $hallucineController->showLoginRegistration("login");
             break;
             case "movies":
