@@ -3,6 +3,7 @@
 require_once "Model.class.php";
 require_once "Movie.class.php";
 require_once "Casting.class.php";
+// require_once "config.php";
 
 class HallucineModel extends Model{
     private $_movies;
@@ -29,10 +30,7 @@ class HallucineModel extends Model{
                 break;
         }
 
-        $request = $this->_getDatabase()->prepare($sql);
-        $request->execute();
-        $rows = $request->fetchAll(PDO::FETCH_ASSOC);
-        $request->closeCursor();
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
 
         foreach ($rows as $key => $value) {
             $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
@@ -48,10 +46,7 @@ class HallucineModel extends Model{
 
     public function requestMovie(int $movieId){
         $sql = "SELECT * FROM `movies` WHERE id = $movieId;";
-        $request = $this->_getDatabase()->prepare($sql);
-        $request->execute();
-        $rows = $request->fetchAll(PDO::FETCH_ASSOC);
-        $request->closeCursor();
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
         $value = $rows[0];
 
         $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);

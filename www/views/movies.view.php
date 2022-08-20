@@ -1,31 +1,34 @@
-<?php 
+<?php
+
 ob_start();
-// var_dump($movies[0]->getTitle());
+
 ?>
 
-<div id="items">
+<div id="items" class="row">
 
 <?php
 for($i=0; $i < count($movies);$i++) : 
+
+    // echo $movies[$i]->getId();
 ?>
 
-<a href="index.php?page=movie&movieid=<?= $movies[$i]->getId(); ?>">
-    <div class="item" >
-        <img src="<?= IMAGE_PATH.$movies[$i]->getImageUrl(); ?>">
+<div class="item col">
+    <a href="index.php?page=movie&movieid=<?= $movies[$i]->getId(); ?>">
+    <img src="<?= IMAGE_PATH.$movies[$i]->getImageUrl(); ?>" alt="<?= $movies[$i]->getTitle(); ?>">
         <br>
         <?= $movies[$i]->getTitle(); ?>
         <br>
-        <span class="item_date"><?= $movies[$i]->getReleaseDate()->format("Y"); ?></span>
-    </div>
-</a>
-
+        <?= $movies[$i]->getReleaseDate()->format("Y"); ?>
+    </a>
+</div>
+    
 <?php endfor; ?>
 
 </div>
 
 <?php
 $content = ob_get_clean();
-$displayList = true;
 $pageTitle = "Halluciné - Films";
-require "template.php";
+$idBodyCss = "movies";
+require "template.view.php";
 ?>
