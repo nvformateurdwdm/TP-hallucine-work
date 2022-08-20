@@ -8,8 +8,6 @@ ob_start();
 
 <?php
 for($i=0; $i < count($movies);$i++) : 
-
-    // echo $movies[$i]->getId();
 ?>
 
 <div class="item col">

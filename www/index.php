@@ -23,7 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $hallucineController->showLoginRegistration("login");
     } else {
         switch($_GET['page']){
-            case "login": 
+            case "login":
+                $hallucineController->showLoginRegistration("login");
+            break;
+            case "logout":
+                session_unset();
                 $hallucineController->showLoginRegistration("login");
             break;
             case "movies":

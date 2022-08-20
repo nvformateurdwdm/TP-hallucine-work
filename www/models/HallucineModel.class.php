@@ -39,7 +39,9 @@ class HallucineModel extends Model{
                 $this->_loginStatus = self::LOGIN_INCORRECT_PASSWORD;
                 return;
             } else {
-                $_user = new User($value["id"], $value["firstname"], $value["lastname"], $value["email"], $value["password"], $value["sex"]);
+                $this->_user = new User($value["id"], $value["firstname"], $value["lastname"], $value["email"], $value["password"], $value["sex"]);
+                $_SESSION['user'] = $this->_user;
+                // var_dump($_SESSION['user']);
                 $this->_loginStatus = self::LOGIN_OK;
             }
         }

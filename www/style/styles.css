@@ -31,6 +31,14 @@ header{
     color: #ffffff;
 }
 
+header div{
+    display: inline-block;
+}
+
+#user{
+    float: right;
+}
+
 nav{
     color: #ffffff;
     font-size: 20px;
