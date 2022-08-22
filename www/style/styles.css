@@ -130,6 +130,19 @@ nav{
     width: 80%;
 }
 
+#rating {
+    width: 180px;
+    height: 5px;
+    background-color: black;
+}
+
+#progressBar {
+    width: 50%;
+    height: 5px;
+    background-color: yellow;
+}
+
+
 .error{
     color:red;
     /* font-size: 10px; */
