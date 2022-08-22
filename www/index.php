@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+
+// session_destroy();
 require "config.php";
 
 require_once "controllers/HallucineController.controller.php";
@@ -19,12 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 }else{
     if(empty($_GET['page'])){
-        // echo "test<br>";
-        // require "views/accueil.view.php";
-        // $sort = isset($_GET['sort']) ? $_GET['sort'] : 0;
         if(isset($_SESSION['user'])){
-            // echo "user";
-            $user = $_SESSION['user'];
             $hallucineController->showMovies(0);
         }else{
             $hallucineController->showLoginRegistration("login");
@@ -36,8 +33,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $hallucineController->showLoginRegistration("login");
             break;
             case "logout":
-                echo "logout";
-                // session_start();
                 session_destroy();
                 $hallucineController->showLoginRegistration("login");
             break;

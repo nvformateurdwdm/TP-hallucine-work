@@ -72,7 +72,7 @@ nav{
     margin: auto;
 }
 
-#login a, label, input {
+#login h1, a, label, input {
     display: block;
     margin: auto;
 }
@@ -83,7 +83,7 @@ nav{
     width: 250px;
 }
 
-#login a, label, input {
+#login h1, a, label, input {
     width: 250px;
 }
 

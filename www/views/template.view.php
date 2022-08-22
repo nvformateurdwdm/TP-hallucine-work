@@ -1,10 +1,7 @@
 <?php
     include "head.php";
-    // echo $_SESSION["test"];
-    // session_start();
-    if(isset($_SESSION['user'])){
-        $user = $_SESSION['user'];
-    }
+    // var_dump(isset($user));
+    // echo "<br>";
 ?>  
 
 <body id="<?=$idBodyCss?>">

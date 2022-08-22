@@ -1,6 +1,5 @@
 <?php
 
-require_once "models/HallucineModel.class.php";
 ob_start();
 
 ?>

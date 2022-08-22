@@ -22,26 +22,19 @@ class HallucineModel extends Model{
 
     public function requestLogin($email, $password){
         $email = $this->_checkInput($email);
-        // echo "2 ".$password."<br>";
-        // $password = $password;
         $sql = "SELECT *  FROM `users` WHERE `email` = '$email'";
         $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
-        // var_dump($rows);
         if(count($rows) == 0){
             $this->_loginStatus = self::LOGIN_USER_NOT_FOUND;
             return;
         }else{
             $value = $rows[0];
-            // var_dump($value["password"]);
-            // echo "2 ".$password."<br>";
-            // echo $value["password"] !== $password;
             if ($value["password"] !== $password) {
                 $this->_loginStatus = self::LOGIN_INCORRECT_PASSWORD;
                 return;
             } else {
                 $this->_user = new User($value["id"], $value["firstname"], $value["lastname"], $value["email"], $value["password"], $value["sex"]);
                 $_SESSION['user'] = $this->_user;
-                // var_dump($_SESSION['user']);
                 $this->_loginStatus = self::LOGIN_OK;
             }
         }
@@ -80,6 +73,8 @@ class HallucineModel extends Model{
         }
 
         $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+
+        // nbLoops = IS_DEBUG ? 5 : 1; // en prévision de la pagination.
 
         foreach ($rows as $key => $value) {
             $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
