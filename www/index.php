@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require "config.php";
 
 require_once "controllers/HallucineController.controller.php";
@@ -17,7 +18,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             break;
     }
 }else{
-    session_start();
     if(empty($_GET['page'])){
         // echo "test<br>";
         // require "views/accueil.view.php";

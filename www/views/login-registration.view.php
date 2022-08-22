@@ -34,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <br>
 
             <input type="submit" id='submit' value='<?= $part; ?>' >
-
+            <a href="#">S'inscrire.</a>
             <a href="index.php?page=movies">Continuer sans s'identifier.</a>
 
             <?php

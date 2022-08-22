@@ -24,7 +24,7 @@ class HallucineController{
                     break;
                 case HallucineModel::LOGIN_OK:
                     $user = $this->_hallucineModel->getUser();
-                    session_start();
+                    // session_start();
                     $_SESSION['user'] = $user;
                     // echo "toto<br>";
                     // var_dump($_SESSION['user']);
