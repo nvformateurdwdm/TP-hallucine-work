@@ -4,7 +4,6 @@ require_once "Model.class.php";
 require_once "Movie.class.php";
 require_once "Casting.class.php";
 require_once "User.class.php";
-// require_once "config.php";
 
 class HallucineModel extends Model{
     private $_user;
@@ -34,7 +33,6 @@ class HallucineModel extends Model{
                 return;
             } else {
                 $this->_user = new User($value["id"], $value["firstname"], $value["lastname"], $value["email"], $value["password"], $value["sex"]);
-                $_SESSION['user'] = $this->_user;
                 $this->_loginStatus = self::LOGIN_OK;
             }
         }

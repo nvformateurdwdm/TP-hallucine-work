@@ -1,5 +1,6 @@
 <?php
 
+require_once "models/User.class.php";
 session_start();
 
 // session_destroy();
@@ -27,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $hallucineController->showLoginRegistration("login");
         }
     } else {
-        if(IS_DEBUG){echo $_GET['page'];}
+        if(IS_DEBUG){echo $_GET['page']."<br>";}
         switch($_GET['page']){
             case "login":
                 $hallucineController->showLoginRegistration("login");

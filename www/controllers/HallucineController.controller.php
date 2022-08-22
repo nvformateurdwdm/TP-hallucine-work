@@ -20,9 +20,11 @@ class HallucineController{
                     require "views/login-registration.view.php";
                     break;
                 case HallucineModel::LOGIN_OK:
-                    $user = $this->_hallucineModel->getUser();
-                    // session_start();
-                    $_SESSION['user'] = $user;
+                    // $user = $this->_hallucineModel->getUser();
+                    $_SESSION['user'] = serialize($this->_hallucineModel->getUser());
+                    // var_dump($_SESSION['user']);
+                    // echo "<br>";
+                    // echo 'totototot';
                     $this->showMovies(0);
                     break;
                 default:

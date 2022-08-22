@@ -1,8 +1,9 @@
 <?php
     if(isset($_SESSION['user'])){
-        var_dump($_SESSION['user']);
-        require_once "models/User.class.php";
-        $user = $_SESSION['user'];
+        // require_once "models/User.class.php";
+        $user = unserialize($_SESSION['user']);
+        // echo 'tototototorodjdshndnhdhndhnd<br>';
+        var_dump($user);
     }
 ?>
 
