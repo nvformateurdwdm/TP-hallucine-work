@@ -1,8 +1,11 @@
 <?php
 
 ob_start();
-$movieId = strval($movie->getId());
-$userId = strval($user->getId());
+
+if(isset($movieUserRating)){
+    $movieId = strval($movieUserRating->getId());
+    $userId = strval($movieUserRating->getId());
+}
 
 ?>
 
@@ -10,11 +13,11 @@ $userId = strval($user->getId());
     <div id="movie_section_content">
         <div id="movie_section_content_left">
             <img src="<?= IMAGE_PATH.$movie->getImageUrl(); ?>" alt="<?= $movie->getTitle(); ?>">
-            <form id="form_rate" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]."?page=movie&action=1") ?>" method="post">
-                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="userId" class="" value="<?= $userId; ?>">
-                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="movieId" class="" value="<?= $movieId; ?>">
-                <input type="text" placeholder="Noter ce film." name="rate" required value="<?= isset($movieUserRating) ? $movieUserRating : ""; ?>">
-                <input type="submit" id='submit' value="<?= isset($movieUserRating) ? "update rate" : "rate"; ?>" >
+            <form id="form_rate" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]."?page=movie&action=1") ?>" method="post" style="display:<?= isset($movieUserRating) ? "block" : "none"; ?>" >
+                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="userId" class="" value="<?= isset($movieUserRating) ? $movieUserRating->getUserId() : "" ; ?>">
+                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="movieId" class="" value="<?= isset($movieUserRating) ? $movieUserRating->getMovieId() : "" ; ?>">
+                <input type="text" placeholder="Noter ce film." name="rate" required value="<?= isset($movieUserRating) ? $movieUserRating->getRate() : ""; ?>">
+                <input type="submit" id='submit' value="<?= isset($movieUserRating) ? "Update rate" : "Rate"; ?>" >
             </form>
         </div>
         <div id="movie_section_content_right">

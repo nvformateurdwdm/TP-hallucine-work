@@ -26,4 +26,5 @@ class User{
     public function getSex(){return $this->_sex;}
 
 }
+
 ?>

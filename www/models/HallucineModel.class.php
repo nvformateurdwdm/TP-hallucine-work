@@ -2,8 +2,9 @@
 
 require_once "Model.class.php";
 require_once "Movie.class.php";
-require_once "Casting.class.php";
 require_once "User.class.php";
+require_once "MovieUserRating.class.php";
+require_once "Casting.class.php";
 
 class HallucineModel extends Model{
     private $_user;
@@ -101,13 +102,14 @@ class HallucineModel extends Model{
         return $this->_movie;
     }
 
-    public function requestMovieUserRating($movieId, $userId):int{
+    public function requestMovieUserRating($movieId, $userId): ?MovieUserRating{
         $sql = "SELECT *  FROM `movies_users_ratings` WHERE `user_id` = $userId AND `movie_id` = $movieId;";
         // echo $sql;
         $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
         if(count($rows) > 0){
             $value = $rows[0];
-            return $value["rate"];
+            $movieUserRating = new MovieUserRating($value["id"], $value["user_id"], $value["movie_id"], $value["rate"]);
+            return $movieUserRating;
         }else{
             return NULL;
         }
