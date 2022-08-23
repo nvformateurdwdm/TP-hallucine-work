@@ -18,7 +18,7 @@ class User{
         $this->_sex = $sex == 0 ? false : true;
     }
 
-    public function getId(){return $this->_email;}
+    public function getId(){return $this->_id;}
     public function getFirstname(){return $this->_firstname;}
     public function getLastname(){return $this->_lastname;}
     public function getEmail(){return $this->_email;}

@@ -47,6 +47,11 @@ class HallucineController{
         $hm = $this->_hallucineModel;
         $hm->requestMovie($movieId);
         $movie = $hm->getMovie();
+        if(isset($_SESSION['user'])){
+            $user = unserialize($_SESSION['user']);
+            $movieUserRating = $hm->requestMovieUserRating($movie->getId(), $user->getId());
+            echo "<br>movieUserRating ".$movieUserRating."<br>";
+        }
         require "views/movie.view.php";
     }
 

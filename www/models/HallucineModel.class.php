@@ -93,11 +93,24 @@ class HallucineModel extends Model{
 
         $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
         $this->_movie = $movie;
+        return $this->_movie;
     }
 
     public function getMovie(){
         // var_dump($this->_movies);
         return $this->_movie;
+    }
+
+    public function requestMovieUserRating($movieId, $userId):int{
+        $sql = "SELECT *  FROM `movies_users_ratings` WHERE `user_id` = $userId AND `movie_id` = $movieId;";
+        // echo $sql;
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+        if(count($rows) > 0){
+            $value = $rows[0];
+            return $value["rate"];
+        }else{
+            return NULL;
+        }
     }
     
 }

@@ -8,7 +8,10 @@ ob_start();
     <div id="movie_section_content">
         <div id="movie_section_content_left">
             <img src="<?= IMAGE_PATH.$movie->getImageUrl(); ?>" alt="<?= $movie->getTitle(); ?>">
-            
+            <form id="form_rate" action="" method="post">
+                <input type="text" placeholder="Noter ce film." name="rate" required value="<?= isset($movieUserRating) ? $movieUserRating : ""; ?>">
+                <input type="submit" id='submit' value="<?= isset($movieUserRating) ? "update rate" : "rate"; ?>" >
+            </form>
         </div>
         <div id="movie_section_content_right">
             <h2><?= $movie->getTitle(); ?></h2>
