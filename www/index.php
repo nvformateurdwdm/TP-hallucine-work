@@ -12,27 +12,28 @@ $hallucineController = new HallucineController();
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $params = array();
-    parse_str($_SERVER["QUERY_STRING"], $exploded);
+    parse_str($_SERVER["QUERY_STRING"], $params);
 
     switch ($params['page']) {
         case 'login':
             $hallucineController->showLoginRegistration("login");
             break;
         case 'movie':
-            switch ($params['action']) {
-                case HallucineModel::MOVIE_USER_GET_RATING:
+            $hallucineController->showMovie($params['movieid']);
+            // switch ($params['action']) {
+            //     case HallucineModel::MOVIE_USER_GET_RATING:
                     
-                    break;
-                case HallucineModel::MOVIE_USER_UPDATE_RATE:
+            //         break;
+            //     case HallucineModel::MOVIE_USER_UPDATE_RATE:
                     
-                    break;
-                case HallucineModel::MOVIE_USER_DELETE_RATE:
+            //         break;
+            //     case HallucineModel::MOVIE_USER_DELETE_RATE:
                     
-                    break;
-                default:
-                    echo "cas de rating non géré...";
-                    break;
-            }
+            //         break;
+            //     default:
+            //         echo "cas de rating non géré...";
+            //         break;
+            // }
                     
             break;
         default:

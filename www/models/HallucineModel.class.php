@@ -121,13 +121,11 @@ class HallucineModel extends Model{
     public function setMovieUserRating(int $userId, int $movieId, int $rate){
         $sql = "INSERT INTO `movies_users_ratings` (`user_id`, `movie_id`, `rate`) VALUES ('$userId', '$movieId', '$rate')";
         $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
-        var_dump($rows);
     }
 
     public function updateMovieUserRating(int $movieUserRatingId, int $rate){
         $sql = "UPDATE `movies_users_ratings` SET `rate` = $rate WHERE `movies_users_ratings`.`id` = $movieUserRatingId;";
         $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
-        var_dump($rows);
     }
 
     public function deleteMovieUserRating(int $movieUserRatingId){

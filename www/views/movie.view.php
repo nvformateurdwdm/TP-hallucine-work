@@ -2,10 +2,21 @@
 
 ob_start();
 
-if(isset($movieUserRating)){
-    $movieId = strval($movieUserRating->getId());
-    $userId = strval($movieUserRating->getId());
+$params = ($_SERVER["QUERY_STRING"]);
+
+if(isset($user)){
+    $movieId = strval($movie->getId());
+    $userId = strval($user->getId());
+    if(isset($movieUserRating)){
+        $action = HallucineModel::MOVIE_USER_UPDATE_RATE;
+    }else{
+        $action = HallucineModel::MOVIE_USER_RATE;
+    }
 }
+
+// var_dump($movieUserRating);
+
+
 
 ?>
 
@@ -13,10 +24,12 @@ if(isset($movieUserRating)){
     <div id="movie_section_content">
         <div id="movie_section_content_left">
             <img src="<?= IMAGE_PATH.$movie->getImageUrl(); ?>" alt="<?= $movie->getTitle(); ?>">
-            <form id="form_rate" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]."?page=movie&action=1") ?>" method="post" style="display:<?= isset($movieUserRating) ? "block" : "none"; ?>" >
-                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="userId" class="" value="<?= isset($movieUserRating) ? $movieUserRating->getUserId() : "" ; ?>">
-                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="movieId" class="" value="<?= isset($movieUserRating) ? $movieUserRating->getMovieId() : "" ; ?>">
-                <input type="text" placeholder="Noter ce film." name="rate" required value="<?= isset($movieUserRating) ? $movieUserRating->getRate() : ""; ?>">
+            <form id="form_rate" action="<?= htmlspecialchars($_SERVER["PHP_SELF"])."?$params" ?>" method="post" style="display:<?= isset($user) ? "block" : "none"; ?>" >
+                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="userId" value="<?= $userId; ?>">
+                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="movieId" value="<?= $movieId; ?>">
+                <input style="display:<?= isset($movieUserRating) ? "block" : "none"; ?>" type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="movieUserRatingId" value="<?= isset($movieUserRating) ? $movieUserRating->getId() : "" ?>">
+                <input type="<?= IS_DEBUG ? "text" : "hidden"; ?>" name="action" value="<?= $action ?>">
+                <input type="number" placeholder="Noter ce film." name="rate" pattern="[0-9]" value="<?= isset($movieUserRating) ? $movieUserRating->getRate() : (IS_DEBUG ? random_int(5, 80) : ""); ?>">
                 <input type="submit" id='submit' value="<?= isset($movieUserRating) ? "Update rate" : "Rate"; ?>" >
             </form>
         </div>

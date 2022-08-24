@@ -3,7 +3,7 @@
         // require_once "models/User.class.php";
         $user = unserialize($_SESSION['user']);
         // echo 'tototototorodjdshndnhdhndhnd<br>';
-        var_dump($user);
+        // var_dump($user);
     }
 ?>
 
