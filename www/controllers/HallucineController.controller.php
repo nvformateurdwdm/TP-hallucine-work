@@ -14,8 +14,6 @@ class HallucineController{
             $loginStatus = $this->_hallucineModel->getLoginStatus();
             switch ($loginStatus) {
                 case HallucineModel::LOGIN_USER_NOT_FOUND:
-                    require "views/login-registration.view.php";
-                    break;
                 case HallucineModel::LOGIN_INCORRECT_PASSWORD:
                     require "views/login-registration.view.php";
                     break;
@@ -49,15 +47,15 @@ class HallucineController{
         $movie = $hm->getMovie();
         if(isset($_SESSION['user'])){
             $user = unserialize($_SESSION['user']);
-            $movieUserRating = $hm->requestMovieUserRating($movie->getId(), $user->getId());
-            echo "<br>";
-            var_dump($movieUserRating);
+            $movieUserRating = $hm->requestMovieUserRating($user->getId(), $movie->getId());
+            // echo "<br>";
+            // var_dump($movieUserRating);
         }
         require "views/movie.view.php";
     }
 
     public function showCastings(){
-
+        
     }
 }
 ?>
