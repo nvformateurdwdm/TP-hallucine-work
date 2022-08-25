@@ -15,6 +15,7 @@ class HallucineModel extends Model{
     const SORT_MOVIES_BY_TITLE = 0;
     const SORT_MOVIES_BY_RELEASE_DATE = 1;
     const SORT_MOVIES_BY_ADDED_DATE = 2;
+    const SORT_MOVIES_BY_RATING = 3;
 
     const LOGIN_USER_NOT_FOUND = 0;
     const LOGIN_INCORRECT_PASSWORD = 1;
@@ -32,13 +33,14 @@ class HallucineModel extends Model{
             $this->_loginStatus = self::LOGIN_USER_NOT_FOUND;
             return;
         }else{
-            $value = $rows[0];
-            if ($value["password"] !== $password) {
+            $bool = password_verify($password, $value["password"]);
+            if (!$bool) {
                 $this->_loginStatus = self::LOGIN_INCORRECT_PASSWORD;
                 return;
             } else {
-                $this->_user = new User($value["id"], $value["firstname"], $value["lastname"], $value["email"], $value["password"], $value["sex"]);
+                $user = new User($value["id"], $value["firstname"], $value["lastname"], $value["email"], $value["password"], $value["sex"]);
                 $this->_loginStatus = self::LOGIN_OK;
+                return $user;
             }
         }
     }
@@ -70,6 +72,14 @@ class HallucineModel extends Model{
             case self::SORT_MOVIES_BY_ADDED_DATE:
                 $sql = "SELECT * FROM `movies` ORDER BY added_date;";
                 break;
+            case self::SORT_MOVIES_BY_RATING:
+                $sql = "SELECT movies.*, AVG(movies_users_ratings.rate) as average_rate
+                        FROM movies_users_ratings
+                            RIGHT JOIN movies
+                            ON movies_users_ratings.movie_id = movies.id
+                        GROUP BY movies.id
+                        ORDER BY average_rate DESC, movies.title;";
+                break;
             default:
                 $sql = "SELECT * FROM `movies`;";
                 break;
@@ -80,10 +90,14 @@ class HallucineModel extends Model{
         // nbLoops = IS_DEBUG ? 5 : 1; // en prévision de la pagination.
 
         foreach ($rows as $key => $value) {
-            $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
+            $movie = new Movie($value['id'], $value['title'], $value['image_url'], $value['runtime'], $value['description'], $value['release_date'], $value['added_date']);
+            if($sort == self::SORT_MOVIES_BY_RATING){
+                if ($value['average_rate'] != "") {
+                    $movie->setRate($value['average_rate']);
+                }
+            }
             $this->_movies[] = $movie;
         }
-        // var_dump($this->_movies);
     }
 
     public function getMovies(){

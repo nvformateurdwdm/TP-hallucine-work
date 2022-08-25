@@ -119,3 +119,11 @@ FROM movies_users_ratings
     ON movies_users_ratings.movie_id = movies.id
 GROUP BY movies.id
 HAVING average_rate > 60;
+
+--------------------------
+-- note moyenne de chaque film pour le tri par classement
+SELECT movies.*, AVG(movies_users_ratings.rate) as average_rate
+FROM movies_users_ratings
+    RIGHT JOIN movies
+    ON movies_users_ratings.movie_id = movies.id
+GROUP BY movies.id;
