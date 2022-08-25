@@ -2,8 +2,9 @@
 
 require_once "Model.class.php";
 require_once "Movie.class.php";
-require_once "Casting.class.php";
 require_once "User.class.php";
+require_once "MovieUserRating.class.php";
+require_once "Casting.class.php";
 
 class HallucineModel extends Model{
     private $_user;
@@ -18,6 +19,10 @@ class HallucineModel extends Model{
     const LOGIN_USER_NOT_FOUND = 0;
     const LOGIN_INCORRECT_PASSWORD = 1;
     const LOGIN_OK = 2;
+
+    const MOVIE_USER_RATE = 0;
+    const MOVIE_USER_UPDATE_RATE = 1;
+    const MOVIE_USER_DELETE_RATE = 2;
 
     public function requestLogin($email, $password){
         $email = $this->_checkInput($email);
@@ -93,12 +98,69 @@ class HallucineModel extends Model{
 
         $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
         $this->_movie = $movie;
+        return $this->_movie;
     }
 
     public function getMovie(){
         // var_dump($this->_movies);
         return $this->_movie;
     }
+
+    public function requestMovieUserRating(int $userId, int $movieId): ?MovieUserRating{
+        $sql = "SELECT *  FROM `movies_users_ratings` WHERE `user_id` = $userId AND `movie_id` = $movieId;";
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+        if(count($rows) > 0){
+            $value = $rows[0];
+            $movieUserRating = new MovieUserRating($value["id"], $value["user_id"], $value["movie_id"], $value["rate"]);
+            return $movieUserRating;
+        }else{
+            return NULL;
+        }
+    }
+
+    public function setMovieUserRating(int $userId, int $movieId, int $rate){
+        $sql = "INSERT INTO `movies_users_ratings` (`user_id`, `movie_id`, `rate`) VALUES ('$userId', '$movieId', '$rate')";
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+    }
+
+    public function updateMovieUserRating(int $movieUserRatingId, int $rate){
+        $sql = "UPDATE `movies_users_ratings` SET `rate` = $rate WHERE `movies_users_ratings`.`id` = $movieUserRatingId;";
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+    }
+
+    public function deleteMovieUserRating(int $movieUserRatingId){
+        $sql = "UPDATE `movies_users_ratings` SET `rate` = $rate WHERE `movies_users_ratings`.`id` = $movieUserRatingId;";
+        $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+        var_dump($rows);
+    }
+
+    // public function requestMovieUserRate(int $movieId, int $userId, int $rate, int $action = MOVIE_USER_RATE): ?MovieUserRating{
+
+    //     switch ($action) {
+    //         case self::MOVIE_USER_RATE:
+    //             $sql = "INSERT INTO `movies_users_ratings` (`user_id`, `movie_id`, `rate`) VALUES ('$userId', '$movieId', '$rate')";
+    //             break;
+    //         case self::MOVIE_USER_UPDATE_RATE:
+    //             $sql = $sql = "UPDATE `movies_users_ratings` SET `rate` = '$rate' WHERE `movies_users_ratings`.`id` = 8";
+    //             break;
+    //         case self::MOVIE_USER_DELETE_RATE:
+                
+    //             break;
+    //         default:
+    //             echo "rate non géré...";
+    //             break;
+    //     }
+
+    //     $sql = "SELECT *  FROM `movies_users_ratings` WHERE `user_id` = $userId AND `movie_id` = $movieId;";
+    //     $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
+    //     if(count($rows) > 0){
+    //         $value = $rows[0];
+    //         $movieUserRating = new MovieUserRating($value["id"], $value["user_id"], $value["movie_id"], $value["rate"]);
+    //         return $movieUserRating;
+    //     }else{
+    //         return NULL;
+    //     }
+    // }
     
 }
 
