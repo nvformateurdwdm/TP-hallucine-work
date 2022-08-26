@@ -5,7 +5,8 @@ const EventNames = {
     MOUSE_OVER: "mouseover",
     MOUSE_OUT: "mouseout",
     INPUT: "input",
-    CHANGE: "change"
+    CHANGE: "change",
+    INIT: "init"
     // etc
 };
 // -------------- MODE DEBUG --------------------

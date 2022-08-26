@@ -106,11 +106,19 @@ class HallucineModel extends Model{
     }
 
     public function requestMovie(int $movieId){
-        $sql = "SELECT * FROM `movies` WHERE id = $movieId;";
+        $sql = "SELECT movies.*, AVG(movies_users_ratings.rate) as average_rate
+                FROM movies_users_ratings
+                    INNER JOIN movies
+                    ON movies_users_ratings.movie_id = movies.id
+                    WHERE movies.id = $movieId;";
         $rows = $this->_getRows(HOST, DB_NAME, LOGIN, PASSWORD, $sql);
         $value = $rows[0];
 
-        $movie = new Movie($value["id"], $value["title"], $value["image_url"], $value["runtime"], $value["description"], $value["release_date"], $value["added_date"]);
+        $movie = new Movie($value['id'], $value['title'], $value['image_url'], $value['runtime'], $value['description'], $value['release_date'], $value['added_date']);
+        
+        if($value['average_rate'] != ""){
+            $movie->setRate($value['average_rate']);
+        }
         $this->_movie = $movie;
         return $this->_movie;
     }

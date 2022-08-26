@@ -142,6 +142,11 @@ nav{
     background-color: yellow;
 }
 
+.disabled{
+    background-color: grey;
+    color: grey;
+}
+
 
 .error{
     color:red;

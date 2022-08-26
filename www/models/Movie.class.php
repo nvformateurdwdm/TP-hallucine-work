@@ -10,7 +10,7 @@ class Movie{
     private DateTime $_releaseDate;
     private DateTime $_addedDate;
 
-    private int $_rate = 0;
+    private int $_rate = -1;
 
     public function __construct($id, $title, $imageURL, $runtime, $description, $releaseDate, $addedDate){
         $this->_id = $id;
@@ -32,7 +32,7 @@ class Movie{
     public function getReleaseDate(){return $this->_releaseDate;}
     public function getAddedDate(){return $this->_addedDate;}
 
-    public function getRate(){return $this->_rate;}
+    public function getRate():int{return $this->_rate;}
     public function setRate(int $rate){$this->_rate = $rate;}
     
 }
